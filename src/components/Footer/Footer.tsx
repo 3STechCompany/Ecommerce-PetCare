@@ -1,3 +1,4 @@
+import Link from "next/link";
 import "./Footer.css";
 
 export default function Footer() {
@@ -48,12 +49,12 @@ export default function Footer() {
           {/* Shop Column */}
           <div>
             <h3 className="footer__column-title">Shop</h3>
-            <a href="/collections/all" className="footer__link">All Products</a>
-            <a href="/collections/cats" className="footer__link">Cats</a>
-            <a href="/collections/dogs" className="footer__link">Dogs</a>
-            <a href="/collections/new-arrivals" className="footer__link">New Arrivals</a>
-            <a href="/collections/best-sellers" className="footer__link">Best Sellers</a>
-            <a href="/collections/save-big" className="footer__link">Save Big</a>
+            <Link href="/collections/all" className="footer__link">All Products</Link>
+            <Link href="/collections/cats" className="footer__link">Cats</Link>
+            <Link href="/collections/dogs" className="footer__link">Dogs</Link>
+            <Link href="/collections/new-arrivals" className="footer__link">New Arrivals</Link>
+            <Link href="/collections/best-sellers" className="footer__link">Best Sellers</Link>
+            <Link href="/collections/save-big" className="footer__link">Save Big</Link>
           </div>
 
           {/* Company Column */}

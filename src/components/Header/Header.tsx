@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useState } from "react";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
 import { navigationMenu } from "@/data/navigation";
@@ -94,14 +95,14 @@ export default function Header() {
           </nav>
 
           {/* Center: Logo */}
-          <a href="/" className="header__logo">
+          <Link href="/" className="header__logo">
             <img
               src="/images/logo/logo.webp"
               alt="Paws Demo"
               width={110}
               height={39}
             />
-          </a>
+          </Link>
 
           {/* Right: Icons */}
           <div className="header__icons">

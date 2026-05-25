@@ -5,6 +5,8 @@ import CollectionHero from "@/components/CollectionHero/CollectionHero";
 import SubcollectionSlider from "@/components/SubcollectionSlider/SubcollectionSlider";
 import CollectionFilterBar, { ActiveFilters } from "@/components/CollectionFilterBar/CollectionFilterBar";
 import CollectionProductGrid from "@/components/CollectionProductGrid/CollectionProductGrid";
+import QuickInfoBar from "@/components/QuickInfoBar/QuickInfoBar";
+import RecentlyViewedProducts from "@/components/RecentlyViewedProducts/RecentlyViewedProducts";
 import { notFound } from "next/navigation";
 import { use } from "react";
 
@@ -44,6 +46,25 @@ function CollectionPageContent({ collection }: { collection: (typeof collections
         if (activeFilters.priceMax !== null && price > activeFilters.priceMax) return false;
         return true;
       });
+    }
+
+    if (activeFilters.availability.length > 0) {
+      result = result.filter((p) => {
+        const availability = p.available === false ? "0" : "1";
+        return activeFilters.availability.includes(availability);
+      });
+    }
+
+    if (activeFilters.sizes.length > 0) {
+      result = result.filter((p) =>
+        activeFilters.sizes.some((size) => p.sizes?.includes(size))
+      );
+    }
+
+    if (activeFilters.colors.length > 0) {
+      result = result.filter((p) =>
+        activeFilters.colors.some((color) => p.colors?.includes(color))
+      );
     }
 
     // Sort
@@ -90,6 +111,8 @@ function CollectionPageContent({ collection }: { collection: (typeof collections
         onFilterChange={setActiveFilters}
       />
       <CollectionProductGrid products={filteredProducts} />
+      <QuickInfoBar />
+      <RecentlyViewedProducts products={collection.products.slice(0, 4)} />
     </>
   );
 }

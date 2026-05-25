@@ -8,6 +8,9 @@ export interface Product {
   hoverImage?: string;
   badge?: string;
   collection: string;
+  available?: boolean;
+  sizes?: string[];
+  colors?: string[];
 }
 
 export const products: Product[] = [

@@ -1,5 +1,6 @@
 .complementary-products {
   margin-top: 2rem;
+  min-width: 0;
 }
 
 .complementary-products__header {
@@ -61,7 +62,7 @@
 .complementary-card {
   display: flex;
   gap: 1.2rem;
-  min-width: 28rem;
+  min-width: min(28rem, 82vw);
   scroll-snap-align: start;
   background: rgb(var(--color-base-accent-2, 227, 241, 248));
   border-radius: var(--media-radius, 8px);
@@ -97,6 +98,7 @@
 .complementary-card__title {
   font-size: calc(var(--font-heading-scale) * 1.2rem);
   margin: 0 0 0.4rem;
+  line-height: 1.25;
 }
 
 .complementary-card__price {
@@ -114,4 +116,19 @@
 .complementary-card__price s {
   color: rgba(var(--color-foreground), 0.5);
   font-size: 1.2rem;
+}
+
+@media screen and (max-width: 749px) {
+  .complementary-products__slider {
+    margin-right: -1.6rem;
+    padding-right: 1.6rem;
+  }
+
+  .complementary-card {
+    min-width: 24rem;
+  }
+
+  .complementary-card__media {
+    width: 8.4rem;
+  }
 }

@@ -1,5 +1,6 @@
 .product-card {
   position: relative;
+  min-width: 0;
   border-radius: var(--radius-card);
   overflow: hidden;
   background: rgb(var(--color-background));
@@ -13,6 +14,7 @@
 
 .product-card__media {
   position: relative;
+  min-width: 0;
   aspect-ratio: 1;
   overflow: hidden;
   border-radius: var(--radius-card);
@@ -117,6 +119,7 @@
   font-weight: 400;
   margin-bottom: 0.5rem;
   color: rgb(var(--color-foreground));
+  overflow-wrap: anywhere;
 }
 
 .product-card__title a {

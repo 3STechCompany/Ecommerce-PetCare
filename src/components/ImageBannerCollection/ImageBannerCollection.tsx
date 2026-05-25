@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import ProductCard from "@/components/ProductCard/ProductCard";
 import { Product } from "@/data/products";
@@ -97,9 +98,9 @@ export default function ImageBannerCollection() {
               playful tunnels to elegant feeding sets, find everything your cat
               needs to thrive.
             </p>
-            <a href="/collections/cats-accessorize" className="button button--primary">
+            <Link href="/collections/cats-accessorize" className="button button--primary">
               Shop Now
-            </a>
+            </Link>
           </div>
         </div>
       </div>

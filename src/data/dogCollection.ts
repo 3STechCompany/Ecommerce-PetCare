@@ -58,6 +58,9 @@ export const dogCollection: CollectionData = {
       image: "/images/products/power-pack-a.webp",
       hoverImage: "/images/products/power-pack-b.webp",
       collection: "dogs",
+      available: true,
+      sizes: ["100g", "200g"],
+      colors: ["green"],
     },
     {
       id: "energy-boost",
@@ -69,6 +72,9 @@ export const dogCollection: CollectionData = {
       hoverImage: "/images/products/energy-boost-c.webp",
       badge: "new",
       collection: "dogs",
+      available: true,
+      sizes: ["100g", "200g", "500g"],
+      colors: ["orange"],
     },
     {
       id: "paw-rope-ring",
@@ -78,6 +84,8 @@ export const dogCollection: CollectionData = {
       image: "/images/products/paw-rope-a.webp",
       hoverImage: "/images/products/paw-rope-b.webp",
       collection: "dogs",
+      available: true,
+      colors: ["beige", "brown"],
     },
     {
       id: "plush-toy-dog",
@@ -87,6 +95,8 @@ export const dogCollection: CollectionData = {
       image: "/images/products/plush-toy-a.webp",
       hoverImage: "/images/products/plush-toy-b.webp",
       collection: "dogs",
+      available: true,
+      colors: ["orange", "white"],
     },
     {
       id: "chew-bone",
@@ -96,6 +106,8 @@ export const dogCollection: CollectionData = {
       image: "/images/products/chew-bone-a.webp",
       hoverImage: "/images/products/chew-bone-b.webp",
       collection: "dogs",
+      available: false,
+      colors: ["brown"],
     },
     {
       id: "tug-rope",
@@ -105,6 +117,8 @@ export const dogCollection: CollectionData = {
       image: "/images/products/tug-rope-a.webp",
       hoverImage: "/images/products/tug-rope-b.webp",
       collection: "dogs",
+      available: true,
+      colors: ["red", "white"],
     },
     {
       id: "zen-bed-dog",
@@ -114,6 +128,8 @@ export const dogCollection: CollectionData = {
       image: "/images/products/zen-bed-a.webp",
       hoverImage: "/images/products/zen-bed-b.webp",
       collection: "dogs",
+      available: true,
+      colors: ["grey", "beige"],
     },
     {
       id: "raincoat-dog",
@@ -123,6 +139,9 @@ export const dogCollection: CollectionData = {
       image: "/images/products/raincoat-a.webp",
       hoverImage: "/images/products/raincoat-b.webp",
       collection: "dogs",
+      available: true,
+      sizes: ["100g", "200g", "300g"],
+      colors: ["green"],
     },
     {
       id: "plush-bed-dog",
@@ -132,6 +151,8 @@ export const dogCollection: CollectionData = {
       image: "/images/products/plush-bed-a.webp",
       hoverImage: "/images/products/plush-bed-b.webp",
       collection: "dogs",
+      available: true,
+      colors: ["blue", "grey"],
     },
     {
       id: "harness-dog",
@@ -143,6 +164,9 @@ export const dogCollection: CollectionData = {
       hoverImage: "/images/products/harness-b.webp",
       badge: "sale",
       collection: "dogs",
+      available: true,
+      sizes: ["100g", "200g", "300g"],
+      colors: ["beige", "pink"],
     },
     {
       id: "calm-sleep",
@@ -151,6 +175,9 @@ export const dogCollection: CollectionData = {
       price: "€39,00 EUR",
       image: "/images/products/calm-sleep-a.webp",
       collection: "dogs",
+      available: true,
+      sizes: ["100g", "200g"],
+      colors: ["blue"],
     },
     {
       id: "derma-care",
@@ -159,6 +186,9 @@ export const dogCollection: CollectionData = {
       price: "€29,00 EUR",
       image: "/images/products/derma-care-a.webp",
       collection: "dogs",
+      available: false,
+      sizes: ["100g"],
+      colors: ["white"],
     },
   ],
   filters: {
