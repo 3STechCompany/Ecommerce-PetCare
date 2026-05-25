@@ -1,0 +1,61 @@
+.variant-picker {
+  border: none;
+  padding: 0;
+  margin: 0 0 1.6rem;
+}
+
+.variant-picker__label {
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  display: block;
+  color: rgba(var(--color-foreground), 0.7);
+}
+
+.variant-picker__selected {
+  font-weight: 600;
+  color: rgb(var(--color-foreground));
+}
+
+.variant-picker__options {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.variant-picker__option {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 2rem;
+  border: 1.5px solid rgba(var(--color-foreground), 0.15);
+  border-radius: var(--variant-pills-radius, 8px);
+  font-size: 1.3rem;
+  font-family: var(--font-body-family);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+  color: rgb(var(--color-foreground));
+  background: transparent;
+  min-width: 6rem;
+  text-align: center;
+}
+
+.variant-picker__option input {
+  display: none;
+}
+
+.variant-picker__option:hover {
+  border-color: rgba(var(--color-foreground), 0.4);
+}
+
+.variant-picker__option.selected {
+  border-color: rgb(var(--color-foreground));
+  background: rgba(var(--color-foreground), 0.05);
+  font-weight: 600;
+}
+
+.variant-picker__option.unavailable {
+  opacity: 0.4;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}

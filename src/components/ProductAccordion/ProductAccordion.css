@@ -1,0 +1,122 @@
+.product-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.accordion-item {
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.08);
+}
+
+.accordion-item__trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.4rem 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--font-body-family);
+  color: rgb(var(--color-foreground));
+  transition: color 0.2s;
+}
+
+.accordion-item__trigger.color-scheme-2 {
+  background: rgb(var(--color-base-accent-2, 227, 241, 248));
+  padding: 1.4rem 1.6rem;
+  border-radius: var(--media-radius, 8px);
+  margin-bottom: 0.4rem;
+}
+
+.accordion-item__trigger:hover {
+  color: rgb(var(--color-foreground));
+}
+
+.accordion-item__title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.accordion-item__icon {
+  display: flex;
+  color: rgba(var(--color-foreground), 0.6);
+}
+
+.accordion-item__icon svg {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+.accordion-item__title {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 500;
+  font-family: var(--font-body-family);
+}
+
+.accordion-item__caret {
+  width: 1rem;
+  height: 0.6rem;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.accordion-item.open .accordion-item__caret {
+  transform: rotate(180deg);
+}
+
+/* Content */
+.accordion-item__content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s ease;
+}
+
+.accordion-item.open .accordion-item__content {
+  grid-template-rows: 1fr;
+}
+
+.accordion-item__inner {
+  overflow: hidden;
+}
+
+.accordion-item__inner p {
+  padding: 0 0 1.6rem;
+  margin: 0;
+  font-size: 1.3rem;
+  line-height: 1.7;
+  color: rgba(var(--color-foreground), 0.7);
+}
+
+/* Nutritional Table */
+.nutritional-table {
+  padding: 0 0 1.6rem;
+}
+
+.nutritional-table__header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.8rem 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04rem;
+  border-bottom: 1.5px solid rgba(var(--color-foreground), 0.15);
+  color: rgba(var(--color-foreground), 0.6);
+}
+
+.nutritional-table__row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.6rem 0;
+  font-size: 1.3rem;
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.06);
+}
+
+.nutritional-table__row.indented span:first-child {
+  padding-left: 1.5rem;
+  font-style: italic;
+  color: rgba(var(--color-foreground), 0.6);
+}

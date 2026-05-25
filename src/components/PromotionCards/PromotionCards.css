@@ -1,0 +1,75 @@
+.promotion-cards-section {
+  padding: 3.6rem 0;
+}
+
+.promotion-cards__title {
+  font-size: calc(var(--font-heading-scale) * 2.4rem);
+  margin: 0 0 2rem;
+}
+
+.promotion-cards__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--grid-desktop-horizontal-spacing, 20px);
+}
+
+@media screen and (max-width: 989px) {
+  .promotion-cards__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 549px) {
+  .promotion-cards__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.promo-card {
+  text-decoration: none;
+  color: rgb(var(--color-foreground));
+  overflow: hidden;
+  border-radius: var(--media-radius, 8px);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.promo-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.promo-card__media {
+  overflow: hidden;
+  border-radius: var(--media-radius, 8px);
+  aspect-ratio: 1;
+}
+
+.promo-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.promo-card:hover .promo-card__media img {
+  transform: scale(1.06);
+}
+
+.promo-card__text {
+  padding: 1.2rem 0.4rem;
+}
+
+.promo-card__sale {
+  display: block;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06rem;
+  color: rgba(var(--color-foreground), 0.5);
+  margin-bottom: 0.3rem;
+}
+
+.promo-card__name {
+  font-size: calc(var(--font-heading-scale) * 1.6rem);
+  margin: 0;
+}

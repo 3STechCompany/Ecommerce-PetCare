@@ -1,0 +1,17 @@
+.video-bg-section {
+  padding: 0;
+}
+
+.video-bg-wrapper {
+  position: relative;
+  border-radius: var(--media-radius, 8px);
+  overflow: hidden;
+  width: 100%;
+}
+
+.video-bg__video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--media-radius, 8px);
+}

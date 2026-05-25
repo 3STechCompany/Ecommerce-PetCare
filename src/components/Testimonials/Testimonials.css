@@ -1,0 +1,138 @@
+.testimonials-section {
+  padding: 6rem 0;
+}
+
+.testimonials-heading {
+  font-size: calc(var(--font-heading-scale) * 3rem);
+  margin-bottom: 4rem;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem;
+}
+
+@media screen and (max-width: 989px) {
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.testimonial-card {
+  background: rgb(var(--color-background));
+  border-radius: var(--radius-media);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+.testimonial-card__inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  padding: 3rem;
+  align-items: center;
+}
+
+@media screen and (max-width: 549px) {
+  .testimonial-card__inner {
+    grid-template-columns: 1fr;
+    padding: 2rem;
+  }
+}
+
+/* Product info */
+.testimonial-product {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+.testimonial-product__image {
+  width: 6rem;
+  height: 6rem;
+  border-radius: var(--radius-media);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.testimonial-product__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.testimonial-product__title {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 400;
+}
+
+.testimonial-product__title a {
+  text-decoration: none;
+  color: rgb(var(--color-foreground));
+  transition: color 0.2s;
+}
+
+.testimonial-product__title a:hover {
+  color: rgb(var(--color-accent));
+}
+
+/* Stars */
+.testimonial-stars {
+  display: flex;
+  gap: 0.2rem;
+  margin-bottom: 1rem;
+}
+
+.star-icon {
+  width: 1.6rem;
+  height: 1.6rem;
+  color: rgb(var(--color-accent));
+}
+
+/* Text */
+.testimonial-text {
+  font-size: 1.4rem;
+  line-height: 1.7;
+  margin-bottom: 1.2rem;
+  color: rgba(var(--color-foreground), 0.7);
+}
+
+.testimonial-name {
+  font-size: 1.4rem;
+}
+
+/* Avatar */
+.testimonial-card__right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.testimonial-avatar {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.testimonial-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 549px) {
+  .testimonial-avatar {
+    width: 7rem;
+    height: 7rem;
+  }
+}

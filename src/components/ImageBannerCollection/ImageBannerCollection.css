@@ -1,0 +1,99 @@
+.image-banner-collection {
+  position: relative;
+}
+
+.image-banner-collection__banner {
+  position: relative;
+  min-height: 40rem;
+  overflow: hidden;
+}
+
+@media screen and (min-width: 990px) {
+  .image-banner-collection__banner {
+    min-height: 80rem;
+  }
+}
+
+.image-banner-collection__media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.image-banner-collection__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-banner-collection__media--desktop {
+  display: none;
+}
+
+@media screen and (min-width: 990px) {
+  .image-banner-collection__media--desktop {
+    display: block;
+  }
+  .image-banner-collection__media--mobile {
+    display: none;
+  }
+}
+
+.image-banner-collection__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  min-height: inherit;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+@media screen and (min-width: 990px) {
+  .image-banner-collection__content {
+    min-height: 80rem;
+  }
+}
+
+.image-banner-collection__text {
+  max-width: 55rem;
+}
+
+@media screen and (max-width: 989px) {
+  .image-banner-collection__text {
+    text-align: center;
+    max-width: 100%;
+  }
+  
+  .image-banner-collection__text h2 {
+    font-size: calc(var(--font-heading-scale) * 3.2rem) !important;
+  }
+}
+
+/* Products overlapping the banner */
+.image-banner-collection__products {
+  position: relative;
+  z-index: 3;
+  margin-top: -190px;
+}
+
+@media screen and (max-width: 989px) {
+  .image-banner-collection__products {
+    margin-top: -40px;
+  }
+}
+
+.image-banner-collection__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--grid-gap-desktop);
+}
+
+@media screen and (max-width: 989px) {
+  .image-banner-collection__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--grid-gap-mobile);
+  }
+}
