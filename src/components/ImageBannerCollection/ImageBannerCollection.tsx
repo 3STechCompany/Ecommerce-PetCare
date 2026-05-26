@@ -98,7 +98,7 @@ export default function ImageBannerCollection() {
               playful tunnels to elegant feeding sets, find everything your cat
               needs to thrive.
             </p>
-            <Link href="/collections/cats-accessorize" className="button button--primary">
+            <Link href="/collections/cat-accessories" className="button button--primary">
               Shop Now
             </Link>
           </div>

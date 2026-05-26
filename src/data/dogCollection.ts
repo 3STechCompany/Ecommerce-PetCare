@@ -45,7 +45,7 @@ export const dogCollection: CollectionData = {
     {
       id: "dog-accessories",
       title: "Dog Accessorize",
-      href: "/collections/dog-accessorize",
+      href: "/collections/dog-accessories",
       image: "/images/collections/dog-accessories.webp",
     },
   ],

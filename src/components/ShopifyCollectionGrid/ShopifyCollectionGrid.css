@@ -1,0 +1,180 @@
+/* ============================================================
+   SHOPIFY COLLECTION GRID
+   Tái sử dụng class .product-grid, .product-card-v2 từ CollectionProductGrid
+   Thêm: skeleton loading, quick-add toast, filter bar
+   ============================================================ */
+
+/* ── Wrapper ── */
+.shopify-cg {
+  padding: 2rem 0 6rem;
+}
+
+/* ── Toolbar: sort + product count ── */
+.shopify-cg__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 0 2rem;
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.1);
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.shopify-cg__count {
+  font-size: 1.4rem;
+  color: rgba(var(--color-foreground), 0.6);
+}
+
+.shopify-cg__sort {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.shopify-cg__sort label {
+  font-size: 1.3rem;
+  color: rgba(var(--color-foreground), 0.6);
+  white-space: nowrap;
+}
+
+.shopify-cg__sort select {
+  padding: 0.7rem 1.2rem;
+  border: 1px solid rgba(var(--color-foreground), 0.2);
+  border-radius: 3rem;
+  font-size: 1.3rem;
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  cursor: pointer;
+  appearance: none;
+  padding-right: 2.8rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath fill='%23666' d='M5 6L0 0h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 8px;
+}
+
+/* ── Skeleton Loading ── */
+@keyframes skeleton-shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.skeleton-card {
+  border-radius: var(--radius-media, 1.2rem);
+  overflow: hidden;
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 25%,
+    #e0e0e0 50%,
+    #f0f0f0 75%
+  );
+  background-size: 800px 100%;
+  animation: skeleton-shimmer 1.4s infinite ease-in-out;
+  border-radius: 0.4rem;
+}
+
+.skeleton-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-media, 1.2rem) var(--radius-media, 1.2rem) 0 0;
+}
+
+.skeleton-title {
+  height: 1.4rem;
+  margin: 1.4rem auto 0.6rem;
+  width: 70%;
+}
+
+.skeleton-price {
+  height: 1.2rem;
+  margin: 0 auto 1.6rem;
+  width: 40%;
+}
+
+/* ── Product Card: Quick Add button loading state ── */
+.product-action-btn--add.is-loading {
+  pointer-events: none;
+}
+
+.product-action-btn--add.is-loading svg {
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.product-action-btn--add.is-added {
+  background: rgb(63, 163, 102) !important;
+}
+
+/* ── Toast notification ── */
+.shopify-cg__toast {
+  position: fixed;
+  bottom: 2.4rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(120%);
+  background: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+  padding: 1.2rem 2.4rem;
+  border-radius: 3rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  white-space: nowrap;
+  z-index: 999;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+
+.shopify-cg__toast.visible {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── Empty state ── */
+.shopify-cg__empty {
+  text-align: center;
+  padding: 8rem 2rem;
+  color: rgba(var(--color-foreground), 0.5);
+  font-size: 1.6rem;
+}
+
+/* ── Error state ── */
+.shopify-cg__error {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: rgb(200, 39, 61);
+  font-size: 1.5rem;
+}
+
+/* ── Sold-out overlay ── */
+.product-card-v2__sold-out {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.product-card-v2__sold-out span {
+  background: rgba(0,0,0,0.7);
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.5rem 1.2rem;
+  border-radius: 3rem;
+}
+
+/* ── Price row ── */
+.product-card-v2__price.on-sale {
+  color: rgb(200, 39, 61);
+  font-weight: 600;
+}

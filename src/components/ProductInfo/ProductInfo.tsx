@@ -6,6 +6,7 @@ import VariantPicker from "@/components/VariantPicker/VariantPicker";
 import QuantitySelector from "@/components/QuantitySelector/QuantitySelector";
 import ProductAccordion from "@/components/ProductAccordion/ProductAccordion";
 import ComplementaryProducts from "@/components/ComplementaryProducts/ComplementaryProducts";
+import { useCart } from "@/context/CartContext";
 import "./ProductInfo.css";
 
 interface ProductInfoProps {
@@ -15,6 +16,7 @@ interface ProductInfoProps {
 export default function ProductInfo({ product }: ProductInfoProps) {
   const [selectedVariant, setSelectedVariant] = useState(product.variants[0].id);
   const [quantity, setQuantity] = useState(1);
+  const { addToCart, isLoading, goToCheckout } = useCart();
 
   const currentVariant = useMemo(
     () => product.variants.find((v) => v.id === selectedVariant) ?? product.variants[0],
@@ -130,12 +132,34 @@ export default function ProductInfo({ product }: ProductInfoProps) {
                 productTitle={product.title}
               />
 
-              {/* Add to Cart */}
+              {/* Add to Cart + Buy it now */}
               <div className="product-buy-buttons">
-                <button className="btn-add-to-cart">
-                  Add to cart
+                {/*
+                  selectedVariant là Shopify GID ("gid://shopify/ProductVariant/...")
+                  → CartContext.addToCart gửi GID này trực tiếp vào cartLinesAdd mutation
+                */}
+                <button
+                  className="btn-add-to-cart"
+                  disabled={isLoading || !currentVariant.available}
+                  onClick={() => addToCart(selectedVariant, quantity)}
+                >
+                  {isLoading
+                    ? "Adding..."
+                    : currentVariant.available
+                    ? "Add to cart"
+                    : "Sold out"}
                 </button>
-                <button className="btn-buy-now">
+                {/*
+                  Buy it now = Add to cart + ngay lập tức redirect sang Shopify Checkout
+                */}
+                <button
+                  className="btn-buy-now"
+                  disabled={isLoading || !currentVariant.available}
+                  onClick={async () => {
+                    await addToCart(selectedVariant, quantity);
+                    goToCheckout();
+                  }}
+                >
                   Buy it now
                 </button>
               </div>
