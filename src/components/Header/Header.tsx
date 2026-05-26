@@ -3,12 +3,14 @@ import Link from "next/link";
 import { useState } from "react";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
 import { navigationMenu } from "@/data/navigation";
+import { useCart } from "@/context/CartContext";
 import "./Header.css";
 
 export default function Header() {
   const { scrollDirection, isAtTop } = useScrollDirection();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
+  const { cartCount, openCart } = useCart();
 
   const toggleMobileItem = (label: string) => {
     setExpandedItems((prev) =>
@@ -117,12 +119,37 @@ export default function Header() {
                 <path d="M1.5,23.48l.37-2.05A10.3,10.3,0,0,1,12,13h0a10.3,10.3,0,0,1,10.13,8.45l.37,2.05" />
               </svg>
             </a>
-            <a href="/cart" className="header__icon" aria-label="Cart">
+            {/* Icon giỏ hàng với badge số lượng — mở CartDrawer */}
+            <button onClick={openCart} className="header__icon header__cart-icon" aria-label={`Cart (${cartCount} items)`} style={{ position: "relative", background: "none", border: "none", cursor: "pointer" }}>
               <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" stroke="currentColor">
                 <path d="M3.41,7.23H20.59a0,0,0,0,1,0,0V19.64a2.86,2.86,0,0,1-2.86,2.86H6.27a2.86,2.86,0,0,1-2.86-2.86V7.23A0,0,0,0,1,3.41,7.23Z" />
                 <path d="M7.23,10.09V6.27A4.77,4.77,0,0,1,12,1.5h0a4.77,4.77,0,0,1,4.77,4.77v3.82" />
               </svg>
-            </a>
+              {/* Badge hiện số lượng sản phẩm trong giỏ */}
+              {cartCount > 0 && (
+                <span
+                  style={{
+                    position: "absolute",
+                    top: "-6px",
+                    right: "-6px",
+                    background: "rgb(var(--color-button, 18 18 18))",
+                    color: "rgb(var(--color-button-text, 255 255 255))",
+                    borderRadius: "50%",
+                    width: "18px",
+                    height: "18px",
+                    fontSize: "10px",
+                    fontWeight: 700,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    lineHeight: 1,
+                  }}
+                  aria-hidden="true"
+                >
+                  {cartCount > 99 ? "99+" : cartCount}
+                </span>
+              )}
+            </button>
           </div>
         </header>
       </div>

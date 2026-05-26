@@ -9,7 +9,7 @@ export const categoryCollections: Collection[] = [
   {
     id: "cat-food",
     title: "Cat Food",
-    href: "/collections/cats-food",
+    href: "/collections/cat-food",
     image: "/images/collections/cat-food.webp",
   },
   {
@@ -21,13 +21,13 @@ export const categoryCollections: Collection[] = [
   {
     id: "cat-accessories",
     title: "Cat Accessories",
-    href: "/collections/cats-accessorize",
+    href: "/collections/cat-accessories",
     image: "/images/collections/cat-accessories.webp",
   },
   {
     id: "dog-accessories",
     title: "Dog Accessories",
-    href: "/collections/dog-accessorize",
+    href: "/collections/dog-accessories",
     image: "/images/collections/dog-accessories.webp",
   },
   {

@@ -5,15 +5,15 @@ import "./PromotionCards.css";
 const promoCards = [
   {
     image: "/images/categories/dog-accessorize.jpg",
-    title: "Dog Accessorize",
+    title: "Dog Accessories",
     sale: "30% sale",
-    href: "/collections/dog-accessorize",
+    href: "/collections/dog-accessories",
   },
   {
     image: "/images/categories/cat-food.jpg",
     title: "Cat Food",
     sale: "25% sale",
-    href: "/collections/cats-food",
+    href: "/collections/cat-food",
   },
   {
     image: "/images/categories/dog-toys.jpg",
@@ -25,7 +25,7 @@ const promoCards = [
     image: "/images/categories/cat-toys.jpg",
     title: "Cat Toys",
     sale: "20% sale",
-    href: "/collections/cats-toys",
+    href: "/collections/cat-toys",
   },
 ];
 
