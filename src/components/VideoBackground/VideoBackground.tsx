@@ -16,7 +16,6 @@ export default function VideoBackground() {
             muted
             playsInline
             preload="metadata"
-            poster="/images/video-poster.jpg"
           >
             <source src="/videos/hero-video.mp4" type="video/mp4" />
           </video>

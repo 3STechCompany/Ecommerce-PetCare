@@ -7,7 +7,7 @@
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 998;
+  z-index: 10000;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.35s ease;
@@ -26,7 +26,7 @@
   width: min(44rem, 100vw);
   height: 100dvh;
   background: rgb(var(--color-background));
-  z-index: 999;
+  z-index: 10001;
   display: flex;
   flex-direction: column;
   transform: translateX(100%);
