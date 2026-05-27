@@ -8,7 +8,7 @@ const brandLogos = [
   "/images/brands/brand-3.jpg",
   "/images/brands/brand-4.jpg",
   "/images/brands/brand-5.jpg",
-  "/images/brands/brand-6.jpg",
+  "/images/brands/brand-5.jpg",
 ];
 
 export default function BrandsMarquee() {

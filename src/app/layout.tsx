@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body suppressHydrationWarning>
         {/*
           CartProvider bọc toàn bộ app → mọi component con đều có thể gọi useCart()
           để thêm sản phẩm vào giỏ, xem số lượng, và redirect sang Shopify Checkout

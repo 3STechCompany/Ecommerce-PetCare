@@ -2,9 +2,9 @@
 import "./ImageGalleryScroll.css";
 
 const galleryImages = [
-  { src: "/images/products/derma-care-c.webp", alt: "Derma Care" },
-  { src: "/images/products/calm-sleep-b.webp", alt: "Calm & Sleep" },
-  { src: "/images/products/joint-support-b.webp", alt: "Joint Support" },
+  { src: "/images/products/complete-care-b.webp", alt: "Complete Care" },
+  { src: "/images/products/chew-bone-b.webp", alt: "Chew Bone" },
+  { src: "/images/products/zen-bed-b.webp", alt: "Zen Bed" },
   { src: "/images/products/plush-bed-b.webp", alt: "Plush Dog Bed" },
   { src: "/images/products/harness-b.webp", alt: "Harness & Leash" },
 ];
