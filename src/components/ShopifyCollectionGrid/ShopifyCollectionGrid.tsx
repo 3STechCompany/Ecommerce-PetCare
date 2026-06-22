@@ -16,7 +16,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { shopifyFetch } from "@/lib/shopify/client";
-import { GET_COLLECTION_BY_HANDLE, GET_PRODUCTS_BY_TAG } from "@/lib/shopify/queries";
+import { GET_COLLECTION_BY_HANDLE, GET_PRODUCTS_BY_TAG, GET_PRODUCTS } from "@/lib/shopify/queries";
 import { useCart } from "@/context/CartContext";
 import { formatShopifyPrice } from "@/lib/shopify";
 import "@/components/CollectionProductGrid/CollectionProductGrid.css";
@@ -168,6 +168,24 @@ export default function ShopifyCollectionGrid({
           tags:             node.tags,
         };
       });
+    }
+
+    // Handle "all" — dùng products query thay vì collection
+    if (collectionHandle === "all") {
+      shopifyFetch<{ products: { edges: { node: ProductNode }[] } }>({
+        query: GET_PRODUCTS,
+        variables: { first: limit },
+      })
+        .then((data) => {
+          if (!cancelled) setProducts(normalizeEdges(data.products.edges));
+        })
+        .catch((err: unknown) => {
+          if (cancelled) return;
+          const msg = err instanceof Error ? err.message : "Unknown error";
+          setError(`Lỗi Shopify API: ${msg}`);
+        })
+        .finally(() => { if (!cancelled) setIsLoading(false); });
+      return () => { cancelled = true; };
     }
 
     // Thử fetch collection trước

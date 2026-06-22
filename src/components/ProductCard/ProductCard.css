@@ -136,3 +136,7 @@
   font-size: 1.4rem;
   color: rgba(var(--color-foreground), 0.7);
 }
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

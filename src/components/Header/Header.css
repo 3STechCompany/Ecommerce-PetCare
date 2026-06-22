@@ -154,10 +154,213 @@
   letter-spacing: 0.1rem;
 }
 
-/* Sub-dropdown */
-.nav-dropdown .nav-dropdown {
-  top: 0;
-  left: 100%;
+/* ===== MEGA MENU ===== */
+.nav-menu__trigger {
+  cursor: default;
+}
+
+/* Full-width panel shared by all dropdown types */
+.mega-menu {
+  position: fixed;
+  top: var(--header-height, 7rem);
+  left: 0;
+  right: 0;
+  background: rgb(var(--color-background));
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+  border-top: 1px solid rgba(var(--color-foreground), 0.07);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+  z-index: 200;
+}
+
+.nav-menu__item:hover > .mega-menu,
+.nav-menu__item:focus-within > .mega-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* ── Mega (columns) ── */
+.mega-menu__inner {
+  display: flex;
+  gap: 4rem;
+  padding: 3.2rem 3.4rem;
+  align-items: flex-start;
+}
+
+.mega-menu__column {
+  flex: 1;
+  min-width: 14rem;
+}
+
+.mega-menu__col-heading {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: rgb(var(--color-foreground));
+  text-decoration: none;
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.01em;
+}
+
+.mega-menu__column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.mega-menu__col-link {
+  font-size: 1.35rem;
+  color: rgba(var(--color-foreground), 0.65);
+  text-decoration: none;
+  transition: color 0.2s, padding-left 0.2s;
+  display: block;
+  padding: 0.2rem 0;
+}
+
+.mega-menu__col-link:hover {
+  color: rgb(var(--color-foreground));
+  padding-left: 0.4rem;
+}
+
+/* Image card inside mega menu */
+.mega-menu__image-card {
+  flex-shrink: 0;
+  width: 22rem;
+}
+
+.mega-menu__image-card-link img {
+  width: 100%;
+  height: 11rem;
+  object-fit: cover;
+  border-radius: 0.8rem;
+  display: block;
+}
+
+.mega-menu__image-badge {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(var(--color-foreground), 0.5);
+  margin: 0.8rem 0 0.4rem;
+}
+
+.mega-menu__image-cta {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: rgb(var(--color-foreground));
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.mega-menu__image-cta::after {
+  content: "→";
+  transition: transform 0.2s;
+}
+
+.mega-menu__image-cta:hover::after {
+  transform: translateX(4px);
+}
+
+/* ── Condensed (About) ── */
+.mega-menu--condensed {
+  left: auto;
+  right: auto;
+  width: auto;
+  min-width: 22rem;
+}
+
+.mega-menu--condensed {
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+.mega-menu__condensed-inner {
+  padding: 2rem 0;
+}
+
+.mega-menu__condensed-inner ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mega-menu__condensed-link {
+  display: block !important;
+  padding: 0.9rem 2.4rem !important;
+  font-size: 1.4rem !important;
+  font-weight: 700;
+  color: rgb(var(--color-foreground)) !important;
+  text-decoration: none;
+  transition: background 0.2s, padding-left 0.2s;
+}
+
+.mega-menu__condensed-link:hover {
+  background: rgba(var(--color-foreground), 0.04);
+  padding-left: 3rem !important;
+}
+
+/* ── Image grid (Specials / Big Savings) ── */
+.mega-menu--image-grid {
+  padding: 2.8rem 0;
+}
+
+.mega-menu__image-grid-inner {
+  display: flex;
+  gap: 2rem;
+  padding: 0 3.4rem;
+  flex-wrap: wrap;
+}
+
+.mega-menu__grid-item {
+  flex: 1;
+  min-width: 14rem;
+  max-width: 20rem;
+}
+
+.mega-menu__grid-image {
+  display: block;
+  border-radius: 0.8rem;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+
+.mega-menu__grid-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.mega-menu__grid-item:hover .mega-menu__grid-image img {
+  transform: scale(1.05);
+}
+
+.mega-menu__grid-title {
+  font-size: 1.35rem;
+  margin-top: 0.6rem;
+  color: rgb(var(--color-foreground));
+}
+
+/* Mobile column heading */
+.mobile-nav__col-heading {
+  display: block;
+  padding: 0.8rem 0 0.3rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(var(--color-foreground), 0.5);
+  margin-top: 0.8rem;
 }
 
 /* ===== ICONS ===== */
@@ -314,8 +517,8 @@
   color: rgb(var(--color-accent));
 }
 
-/* Item highlight badge */
-.nav-menu__item:nth-child(4) .nav-menu__link::after {
+/* HOT badge on Big Savings item */
+.nav-menu__item--image-grid:nth-child(4) .nav-menu__link span::after {
   content: 'HOT';
   background: rgb(var(--color-accent-2));
   color: rgb(var(--color-foreground));
@@ -325,6 +528,7 @@
   font-weight: 700;
   line-height: 1.4;
   margin-left: 0.4rem;
+  vertical-align: middle;
 }
 
 /* Spacer for fixed header */

@@ -7,18 +7,6 @@ export interface Collection {
 
 export const categoryCollections: Collection[] = [
   {
-    id: "cat-food",
-    title: "Cat Food",
-    href: "/collections/cat-food",
-    image: "/images/collections/cat-food.webp",
-  },
-  {
-    id: "dog-food",
-    title: "Dog Food",
-    href: "/collections/dog-food",
-    image: "/images/collections/dog-food.webp",
-  },
-  {
     id: "cat-accessories",
     title: "Cat Accessories",
     href: "/collections/cat-accessories",
@@ -29,6 +17,12 @@ export const categoryCollections: Collection[] = [
     title: "Dog Accessories",
     href: "/collections/dog-accessories",
     image: "/images/collections/dog-accessories.webp",
+  },
+  {
+    id: "cat-toys",
+    title: "Cat Toys",
+    href: "/collections/cat-toys",
+    image: "/images/collections/cat-toys.webp",
   },
   {
     id: "dog-toys",

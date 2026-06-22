@@ -9,6 +9,7 @@ export interface Product {
   badge?: string;
   collection: string;
   available?: boolean;
+  variantId?: string;
   sizes?: string[];
   colors?: string[];
 }
