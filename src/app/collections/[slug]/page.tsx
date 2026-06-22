@@ -217,7 +217,7 @@ export default async function CollectionPage({
       <ShopifyCollectionGrid
         collectionHandle={handle}
         fallbackTag={TAG_FALLBACK[handle]}
-        limit={24}
+        limit={handle === "all" ? 250 : 48}
         skeletonCount={12}
       />
 

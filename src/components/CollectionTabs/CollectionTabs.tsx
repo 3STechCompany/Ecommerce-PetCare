@@ -11,7 +11,6 @@ import "./CollectionTabs.css";
 const TABS = [
   { label: "Cat Accessories", handle: "cat-accessories" },
   { label: "Dog Toys",        handle: "dog-toys"        },
-  { label: "Cat Food",        handle: "cat-food"        },
 ];
 
 type ShopifyCollectionResult = {
@@ -63,6 +62,7 @@ function shopifyToProduct(node: CollectionNode, handle: string): Product {
     hoverImage: imgs[1]?.url,
     collection: handle,
     available: variant?.availableForSale ?? false,
+    variantId: variant?.id,
   };
 }
 

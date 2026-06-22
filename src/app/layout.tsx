@@ -19,8 +19,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body suppressHydrationWarning>
+    <html lang="en" data-scroll-behavior="smooth">
+      <body>
         {/*
           CartProvider bọc toàn bộ app → mọi component con đều có thể gọi useCart()
           để thêm sản phẩm vào giỏ, xem số lượng, và redirect sang Shopify Checkout

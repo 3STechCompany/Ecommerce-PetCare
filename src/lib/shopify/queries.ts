@@ -158,6 +158,33 @@ export const GET_COLLECTION_BY_HANDLE = `
 `;
 
 /**
+ * Lấy tất cả collections trong store.
+ */
+export const GET_ALL_COLLECTIONS = `
+  query GetAllCollections($first: Int!) {
+    collections(first: $first) {
+      edges {
+        node {
+          id
+          title
+          handle
+          description
+          image {
+            url
+            altText
+          }
+          products(first: 1) {
+            edges {
+              node { id }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+/**
  * Lấy sản phẩm theo tag (dùng khi collection chưa được tạo trên Shopify).
  * Ví dụ: query = "tag:cat" hoặc "tag:dog"
  */
