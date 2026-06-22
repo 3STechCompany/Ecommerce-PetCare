@@ -19,7 +19,6 @@ const SLUG_ALIASES: Record<string, string> = {
   "dog-accessorize":       "dog-accessories",
   "cats-food":             "cat-food",
   "cats-toys":             "cat-toys",
-  "dog-accessorize":       "dog-accessories",
 };
 
 // ── Subcollection navigation sidebar ──

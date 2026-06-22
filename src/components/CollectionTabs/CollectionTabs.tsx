@@ -39,7 +39,9 @@ type ShopifyCollectionResult = {
   } | null;
 };
 
-function shopifyToProduct(node: ShopifyCollectionResult["collection"]["products"]["edges"][number]["node"], handle: string): Product {
+type CollectionNode = NonNullable<ShopifyCollectionResult["collection"]>["products"]["edges"][number]["node"];
+
+function shopifyToProduct(node: CollectionNode, handle: string): Product {
   const variant = node.variants.edges[0]?.node;
   const imgs = node.images.edges.map((e) => e.node);
   const price = variant
