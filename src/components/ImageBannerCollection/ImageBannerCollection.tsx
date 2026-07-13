@@ -1,49 +1,81 @@
 "use client";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { shopifyFetch } from "@/lib/shopify/client";
+import { GET_COLLECTION_BY_HANDLE } from "@/lib/shopify/queries";
+import { formatShopifyPrice } from "@/lib/shopify";
 import ProductCard from "@/components/ProductCard/ProductCard";
 import { Product } from "@/data/products";
 import "./ImageBannerCollection.css";
 
-const kittyProducts: Product[] = [
-  {
-    id: "oasis-tunnel-banner",
-    title: "Oasis Tunnel",
-    href: "/products/oasis-tunnel",
-    price: "€59,00 EUR",
-    image: "/images/products/oasis-tunnel-a.webp",
-    badge: "new",
+type Node = {
+  id: string;
+  title: string;
+  handle: string;
+  tags: string[];
+  images: { edges: { node: { url: string; altText: string | null } }[] };
+  variants: {
+    edges: {
+      node: {
+        id: string;
+        availableForSale: boolean;
+        price: { amount: string; currencyCode: string };
+        compareAtPrice: { amount: string; currencyCode: string } | null;
+      };
+    }[];
+  };
+};
+
+type CollectionResult = {
+  collection: {
+    products: { edges: { node: Node }[] };
+  } | null;
+};
+
+function nodeToProduct(node: Node): Product {
+  const variant = node.variants.edges[0]?.node;
+  const imgs = node.images.edges.map((e) => e.node);
+  const price = variant
+    ? formatShopifyPrice(variant.price.amount, variant.price.currencyCode)
+    : "—";
+  const compareAtPrice = variant?.compareAtPrice
+    ? formatShopifyPrice(variant.compareAtPrice.amount, variant.compareAtPrice.currencyCode)
+    : undefined;
+  const badge = node.tags.includes("new") ? "new" : compareAtPrice ? "sale" : undefined;
+
+  return {
+    id: node.id,
+    title: node.title,
+    href: `/products/${node.handle}`,
+    price,
+    compareAtPrice,
+    image: imgs[0]?.url ?? "",
+    hoverImage: imgs[1]?.url,
+    badge,
     collection: "cat-accessories",
-  },
-  {
-    id: "perfect-pair-banner",
-    title: "Perfect Pair",
-    href: "/products/perfect-pair",
-    price: "€25,00 EUR",
-    image: "/images/products/perfect-pair-a.webp",
-    collection: "cat-accessories",
-  },
-  {
-    id: "optimal-comfort-banner",
-    title: "Optimal Comfort",
-    href: "/products/optimal-comfort",
-    price: "€79,00 EUR",
-    image: "/images/products/optimal-comfort-a.webp",
-    collection: "cat-accessories",
-  },
-  {
-    id: "oasis-haven-banner",
-    title: "Oasis Haven",
-    href: "/products/oasis-haven",
-    price: "€89,00 EUR",
-    image: "/images/products/oasis-haven-a.webp",
-    badge: "sale",
-    collection: "cat-accessories",
-  },
-];
+    available: variant?.availableForSale ?? false,
+    variantId: variant?.id,
+  };
+}
 
 export default function ImageBannerCollection() {
   const { ref, isVisible } = useScrollAnimation(0.05);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    shopifyFetch<CollectionResult>({
+      query: GET_COLLECTION_BY_HANDLE,
+      variables: { handle: "cat-accessories", first: 4 },
+    })
+      .then((data) => {
+        const edges = data.collection?.products?.edges ?? [];
+        setProducts(edges.map(({ node }) => nodeToProduct(node)));
+      })
+      .catch(() => setProducts([]))
+      .finally(() => setLoading(false));
+  }, []);
 
   return (
     <section className="image-banner-collection" ref={ref}>
@@ -107,9 +139,19 @@ export default function ImageBannerCollection() {
 
       <div className="image-banner-collection__products page-width">
         <div className="image-banner-collection__grid">
-          {kittyProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+          {loading
+            ? Array.from({ length: 4 }).map((_, i) => (
+                <div key={i} className="product-card product-card--skeleton">
+                  <div className="skeleton skeleton-image" style={{ aspectRatio: "1/1", width: "100%", borderRadius: "1.2rem" }} />
+                  <div style={{ padding: "1rem" }}>
+                    <div className="skeleton skeleton-title" style={{ height: "1.4rem", marginBottom: "0.6rem", width: "70%" }} />
+                    <div className="skeleton skeleton-price" style={{ height: "1.2rem", width: "40%" }} />
+                  </div>
+                </div>
+              ))
+            : products.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
         </div>
       </div>
     </section>
