@@ -22,7 +22,7 @@ export const categoryCollections: Collection[] = [
     id: "cat-toys",
     title: "Cat Toys",
     href: "/collections/cat-toys",
-    image: "/images/collections/cat-toys.webp",
+    image: "/images/collections/cat-food.webp",
   },
   {
     id: "dog-toys",
