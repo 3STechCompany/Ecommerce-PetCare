@@ -32,15 +32,12 @@ function nodeToProduct(node: Node): Product {
   const price = variant
     ? formatShopifyPrice(variant.price.amount, variant.price.currencyCode)
     : "—";
-  const fakeCompare = variant
+  const compareAtPrice = variant
     ? formatShopifyPrice(
         (parseFloat(variant.price.amount) * 1.25).toFixed(2),
         variant.price.currencyCode
       )
     : undefined;
-  const compareAtPrice = variant?.compareAtPrice
-    ? formatShopifyPrice(variant.compareAtPrice.amount, variant.compareAtPrice.currencyCode)
-    : fakeCompare;
   const badge = node.tags.includes("new") ? "new" : "sale";
 
   return {
