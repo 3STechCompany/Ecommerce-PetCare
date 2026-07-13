@@ -28,7 +28,7 @@ export interface NavMegaImage {
 // type = "mega"       → full-width panel: columns + optional image card (Shop)
 // type = "condensed"  → narrow dropdown: flat list of bold links (About)
 // type = "image-grid" → image card grid (Specials, Big Savings)
-// type = "link"       → no dropdown, direct link (Features)
+// type = "link"       → no dropdown, direct link
 
 export type NavItemType = "mega" | "condensed" | "image-grid" | "link";
 
@@ -53,49 +53,39 @@ export const navigationMenu: NavItem[] = [
     type: "mega",
     columns: [
       {
-        heading: "Product Layouts",
-        headingHref: "#",
-        links: [
-          { label: "3 Column Layout",   href: "/products/natural-dental-sticks" },
-          { label: "2 Column Layout",   href: "/products/calm-sleep" },
-          { label: "Quick Order Layout",href: "/products/herbal-harmony" },
-          { label: "Gift Card",         href: "/products/gift-card" },
-          { label: "Color Variants",    href: "/products/waterproof-dog-raincoat" },
-        ],
-      },
-      {
-        heading: "Featured",
-        headingHref: "#",
-        links: [
-          { label: "All products",  href: "/collections/all" },
-          { label: "Save Big",      href: "/collections/save-big" },
-          { label: "New Arrivals",  href: "/collections/new-arrivals" },
-          { label: "Best Sellers",  href: "/collections/best-sellers" },
-        ],
-      },
-      {
         heading: "Collections",
-        headingHref: "#",
+        headingHref: "/collections",
         links: [
-          { label: "All collections", href: "/collections" },
-          { label: "Cats",            href: "/collections/cats" },
-          { label: "Dogs",            href: "/collections/dogs" },
-          { label: "Birds",           href: "/collections/bird-food" },
+          { label: "All Products",      href: "/collections/all" },
+          { label: "Cat Accessories",   href: "/collections/cat-accessories" },
+          { label: "Cat Toys",          href: "/collections/cat-toys" },
+          { label: "Dog Accessories",   href: "/collections/dog-accessories" },
+          { label: "Dog Toys",          href: "/collections/dog-toys" },
         ],
       },
       {
-        heading: "Top 4",
-        headingHref: "#",
+        heading: "Cat Products",
+        headingHref: "/collections/cat-accessories",
         links: [
-          { label: "Derma Care",             href: "/products/derma-care" },
-          { label: "Optimal Comfort",        href: "/products/optimal-comfort" },
-          { label: "Waterproof Dog Raincoat",href: "/products/waterproof-dog-raincoat" },
-          { label: "Oasis Tunnel",           href: "/products/oasis-tunnel" },
+          { label: "Oasis Tunnel",    href: "/products/oasis-tunnel" },
+          { label: "Perfect Pair",    href: "/products/perfect-pair" },
+          { label: "Optimal Comfort", href: "/products/optimal-comfort" },
+          { label: "Oasis Haven",     href: "/products/oasis-haven" },
+        ],
+      },
+      {
+        heading: "Dog Products",
+        headingHref: "/collections/dog-toys",
+        links: [
+          { label: "Paw-Friendly Rope Ring", href: "/products/paw-friendly-rope-ring" },
+          { label: "Plush Toy",              href: "/products/plush-toy" },
+          { label: "Robust Chew Bone",       href: "/products/robust-chew-bone-toy" },
+          { label: "Playful Tug Rope",       href: "/products/playful-tug-rope-toy" },
         ],
       },
     ],
     megaImage: {
-      href: "/collections/cats",
+      href: "/collections/cat-accessories",
       image: "/images/hero/hero-cats-desktop.jpg",
       badge: "20% Sale",
       linkText: "Explore Now",
@@ -109,10 +99,7 @@ export const navigationMenu: NavItem[] = [
     type: "condensed",
     flatLinks: [
       { label: "About Us", href: "/pages/about-us" },
-      { label: "Team",     href: "/pages/team" },
-      { label: "Events",   href: "/pages/events" },
       { label: "FAQ",      href: "/pages/faq" },
-      { label: "Journal",  href: "/blogs/news" },
       { label: "Contact",  href: "/pages/contact" },
     ],
   },
@@ -120,35 +107,28 @@ export const navigationMenu: NavItem[] = [
   // ── 3. Specials — image grid ──
   {
     label: "Specials",
-    href: "/collections/save-big",
+    href: "/collections/all",
     type: "image-grid",
     imageItems: [
-      { href: "/collections/save-big",       image: "/images/categories/cat-food.jpg",         badge: "10-30% Sale", title: "Big Savings" },
-      { href: "/collections/cat-food",       image: "/images/categories/dog-food.jpg",          badge: "15% Sale",   title: "Instant Meals" },
-      { href: "/collections/cat-accessories",image: "/images/categories/cat-accessorize.jpg",   badge: "30% Sale",   title: "Accessorize" },
-      { href: "/collections/dog-accessories",image: "/images/categories/dog-accessorize.jpg",   badge: "30% Sale",   title: "Dog Accessories" },
+      { href: "/collections/cat-accessories", image: "/images/categories/cat-accessorize.jpg", badge: "30% Sale", title: "Cat Accessories" },
+      { href: "/collections/cat-toys",        image: "/images/categories/cat-toys.jpg",         badge: "20% Sale", title: "Cat Toys"        },
+      { href: "/collections/dog-accessories", image: "/images/categories/dog-accessorize.jpg",  badge: "30% Sale", title: "Dog Accessories" },
+      { href: "/collections/dog-toys",        image: "/images/categories/dog-toys.jpg",          badge: "20% Sale", title: "Dog Toys"        },
     ],
   },
 
   // ── 4. Big Savings — image grid ──
   {
     label: "Big Savings",
-    href: "/collections/save-big",
+    href: "/collections/all",
     type: "image-grid",
     imageItems: [
-      { href: "/products/oasis-haven",             image: "/images/products/oasis-haven-a.webp",    badge: "20% Sale", title: "Oasis Haven" },
-      { href: "/products/calm-sleep",              image: "/images/products/calm-sleep-a.webp",      badge: "20% Sale", title: "Calm & Sleep" },
-      { href: "/products/waterproof-dog-raincoat", image: "/images/products/raincoat-a.webp",        badge: "20% Sale", title: "Waterproof Raincoat" },
-      { href: "/products/natural-dental-sticks",   image: "/images/products/power-pack-a.webp",      badge: "20% Sale", title: "Natural Dental Sticks" },
-      { href: "/products/energy-boost",            image: "/images/products/energy-boost-a.webp",    badge: "20% Sale", title: "Energy Boost" },
-      { href: "/products/playful-tug-rope-toy",    image: "/images/products/tug-rope-a.webp",        badge: "20% Sale", title: "Tug Rope Toy" },
+      { href: "/products/oasis-haven",           image: "/images/products/oasis-haven-a.webp",   badge: "20% Sale", title: "Oasis Haven"        },
+      { href: "/products/optimal-comfort",       image: "/images/products/optimal-comfort-a.webp",badge: "20% Sale", title: "Optimal Comfort"    },
+      { href: "/products/oasis-tunnel",          image: "/images/products/oasis-tunnel-a.webp",  badge: "20% Sale", title: "Oasis Tunnel"        },
+      { href: "/products/playful-tug-rope-toy",  image: "/images/products/tug-rope-a.webp",      badge: "20% Sale", title: "Tug Rope Toy"        },
+      { href: "/products/robust-chew-bone-toy",  image: "/images/products/chew-bone-a.webp",     badge: "20% Sale", title: "Chew Bone Toy"       },
+      { href: "/products/paw-friendly-rope-ring",image: "/images/products/paw-rope-a.webp",      badge: "20% Sale", title: "Rope Ring"           },
     ],
-  },
-
-  // ── 5. Features — simple link ──
-  {
-    label: "Features",
-    href: "/pages/features",
-    type: "link",
   },
 ];
