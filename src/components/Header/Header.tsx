@@ -1,11 +1,16 @@
 "use client";
 import Link from "next/link";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
 import { navigationMenu, type NavItem } from "@/data/navigation";
 import { useCart } from "@/context/CartContext";
 import SearchDrawer from "@/components/SearchDrawer/SearchDrawer";
 import "./Header.css";
+
+function closeAllMenus() {
+  (document.activeElement as HTMLElement)?.blur();
+}
 
 const CaretIcon = () => (
   <svg aria-hidden="true" focusable="false" className="icon-caret" viewBox="0 0 10 6">
@@ -15,14 +20,13 @@ const CaretIcon = () => (
   </svg>
 );
 
-function DesktopNavItem({ item }: { item: NavItem }) {
+function DesktopNavItem({ item, onClose }: { item: NavItem; onClose: () => void }) {
   const hasDropdown = item.type !== "link";
 
   return (
     <li className={`nav-menu__item nav-menu__item--${item.type}`}>
-      {/* Trigger */}
       {item.type === "link" ? (
-        <Link href={item.href} className="nav-menu__link">
+        <Link href={item.href} className="nav-menu__link" onClick={onClose}>
           <span>{item.label}</span>
         </Link>
       ) : (
@@ -32,19 +36,19 @@ function DesktopNavItem({ item }: { item: NavItem }) {
         </div>
       )}
 
-      {/* ── MEGA MENU (Shop) ── */}
+      {/* ── MEGA MENU ── */}
       {item.type === "mega" && item.columns && (
         <div className="mega-menu">
           <div className="mega-menu__inner page-width">
             {item.columns.map((col) => (
               <div key={col.heading} className="mega-menu__column">
-                <Link href={col.headingHref} className="mega-menu__col-heading heading-bold">
+                <Link href={col.headingHref} className="mega-menu__col-heading heading-bold" onClick={onClose}>
                   {col.heading}
                 </Link>
                 <ul>
                   {col.links.map((link) => (
                     <li key={link.label}>
-                      <Link href={link.href} className="mega-menu__col-link">
+                      <Link href={link.href} className="mega-menu__col-link" onClick={onClose}>
                         {link.label}
                       </Link>
                     </li>
@@ -52,15 +56,13 @@ function DesktopNavItem({ item }: { item: NavItem }) {
                 </ul>
               </div>
             ))}
-
-            {/* Image card */}
             {item.megaImage && (
               <div className="mega-menu__image-card">
-                <Link href={item.megaImage.href} className="mega-menu__image-card-link">
+                <Link href={item.megaImage.href} className="mega-menu__image-card-link" onClick={onClose}>
                   <img src={item.megaImage.image} alt="" loading="lazy" />
                 </Link>
                 <p className="mega-menu__image-badge">{item.megaImage.badge}</p>
-                <Link href={item.megaImage.href} className="mega-menu__image-cta animate-arrow">
+                <Link href={item.megaImage.href} className="mega-menu__image-cta animate-arrow" onClick={onClose}>
                   {item.megaImage.linkText}
                 </Link>
               </div>
@@ -69,14 +71,14 @@ function DesktopNavItem({ item }: { item: NavItem }) {
         </div>
       )}
 
-      {/* ── CONDENSED DROPDOWN (About) ── */}
+      {/* ── CONDENSED DROPDOWN ── */}
       {item.type === "condensed" && item.flatLinks && (
         <div className="mega-menu mega-menu--condensed">
           <div className="mega-menu__condensed-inner">
             <ul>
               {item.flatLinks.map((link) => (
                 <li key={link.label}>
-                  <Link href={link.href} className="mega-menu__col-heading heading-bold mega-menu__condensed-link">
+                  <Link href={link.href} className="mega-menu__col-heading heading-bold mega-menu__condensed-link" onClick={onClose}>
                     {link.label}
                   </Link>
                 </li>
@@ -86,18 +88,16 @@ function DesktopNavItem({ item }: { item: NavItem }) {
         </div>
       )}
 
-      {/* ── IMAGE GRID (Specials / Big Savings) ── */}
+      {/* ── IMAGE GRID ── */}
       {item.type === "image-grid" && item.imageItems && (
         <div className="mega-menu mega-menu--image-grid">
           <div className="mega-menu__image-grid-inner page-width">
             {item.imageItems.map((img) => (
               <div key={img.title} className="mega-menu__grid-item">
-                <Link href={img.href} className="mega-menu__grid-image">
+                <Link href={img.href} className="mega-menu__grid-image" onClick={onClose}>
                   <img src={img.image} alt={img.title} loading="lazy" />
                 </Link>
-                {img.badge && (
-                  <p className="mega-menu__image-badge">{img.badge}</p>
-                )}
+                {img.badge && <p className="mega-menu__image-badge">{img.badge}</p>}
                 <p className="mega-menu__grid-title heading-bold">{img.title}</p>
               </div>
             ))}
@@ -114,6 +114,14 @@ export default function Header() {
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
   const [searchOpen, setSearchOpen] = useState(false);
   const { cartCount, openCart } = useCart();
+  const pathname = usePathname();
+
+  // Close everything on route change
+  useEffect(() => {
+    setMobileOpen(false);
+    setExpandedItems([]);
+    closeAllMenus();
+  }, [pathname]);
 
   const openSearch  = useCallback(() => setSearchOpen(true), []);
   const closeSearch = useCallback(() => setSearchOpen(false), []);
@@ -148,7 +156,7 @@ export default function Header() {
 
             <ul className="nav-menu" role="list">
               {navigationMenu.map((item) => (
-                <DesktopNavItem key={item.label} item={item} />
+                <DesktopNavItem key={item.label} item={item} onClose={closeAllMenus} />
               ))}
             </ul>
           </nav>

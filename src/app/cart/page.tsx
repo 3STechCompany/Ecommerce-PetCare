@@ -13,8 +13,39 @@ export default function CartPage() {
   const { cart, isLoading, cartCount, updateQuantity, removeLine, goToCheckout } =
     useCart();
 
+  // ── Đang tải ──
+  if (isLoading) {
+    return (
+      <div className="cart-page page-width">
+        <h1 className="cart-page__title heading-bold">Your Cart</h1>
+        <div className="cart-layout">
+          <div className="cart-lines">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <div key={i} className="cart-line" style={{ opacity: 0.6 }}>
+                <div style={{ width: 100, height: 100, borderRadius: 8, background: "#eee" }} />
+                <div>
+                  <div style={{ height: 16, width: "70%", background: "#eee", borderRadius: 4, marginBottom: 8 }} />
+                  <div style={{ height: 14, width: "40%", background: "#eee", borderRadius: 4 }} />
+                </div>
+                <div style={{ width: 80, height: 36, background: "#eee", borderRadius: 20 }} />
+                <div style={{ width: 20, height: 20, background: "#eee", borderRadius: "50%" }} />
+              </div>
+            ))}
+          </div>
+          <div className="cart-summary" style={{ opacity: 0.5 }}>
+            <div style={{ height: 24, width: "60%", background: "#ddd", borderRadius: 4, marginBottom: 16 }} />
+            <div style={{ height: 16, width: "100%", background: "#ddd", borderRadius: 4, marginBottom: 8 }} />
+            <div style={{ height: 16, width: "80%", background: "#ddd", borderRadius: 4, marginBottom: 24 }} />
+            <div style={{ height: 48, width: "100%", background: "#ddd", borderRadius: 40 }} />
+          </div>
+        </div>
+        <style>{cartStyles}</style>
+      </div>
+    );
+  }
+
   // ── Trạng thái giỏ trống ──
-  if (!isLoading && (!cart || cartCount === 0)) {
+  if (!cart || cartCount === 0) {
     return (
       <div className="cart-page page-width">
         <h1 className="cart-page__title heading-bold">Your Cart</h1>
