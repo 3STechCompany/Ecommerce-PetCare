@@ -121,11 +121,6 @@ export default function CartDrawer() {
         aria-label="Cart"
         tabIndex={-1}
       >
-        {/* ── Promo Banner ── */}
-        <div className="cart-drawer__promo">
-          <p>Save 15% on your first purchase with code <strong>WELCOME</strong></p>
-        </div>
-
         {/* ── Header ── */}
         <div className="cart-drawer__header">
           <span className="cart-drawer__title">Cart</span>
