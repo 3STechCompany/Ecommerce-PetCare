@@ -135,6 +135,22 @@
 .product-card__price {
   font-size: 1.4rem;
   color: rgba(var(--color-foreground), 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.product-card__price--compare {
+  color: rgba(var(--color-foreground), 0.4);
+  text-decoration: line-through;
+  font-size: 1.2rem;
+}
+
+.product-card__price--sale {
+  color: rgb(var(--color-accent, 200 39 61));
+  font-weight: 600;
 }
 
 @keyframes spin {

@@ -96,7 +96,12 @@ export default function ProductCard({ product }: ProductCardProps) {
         <h3 className="product-card__title">
           <a href={product.href}>{product.title}</a>
         </h3>
-        <div className="product-card__price">{product.price}</div>
+        <div className="product-card__price">
+          {product.compareAtPrice && (
+            <s className="product-card__price--compare">{product.compareAtPrice}</s>
+          )}
+          <span className="product-card__price--sale">{product.price}</span>
+        </div>
       </div>
     </div>
   );
