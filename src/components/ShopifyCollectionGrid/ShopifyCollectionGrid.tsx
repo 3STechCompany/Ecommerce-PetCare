@@ -153,6 +153,8 @@ export default function ShopifyCollectionGrid({
         const priceAmount   = variant?.price.amount              ?? "0";
         const compareAmount = variant?.compareAtPrice?.amount    ?? null;
         const currencyCode  = variant?.price.currencyCode        ?? "USD";
+        // compareAtPrice chỉ hợp lệ khi thực sự lớn hơn giá bán (nhiều sản phẩm bị import với compareAtPrice == price)
+        const hasRealDiscount = !!compareAmount && parseFloat(compareAmount) > parseFloat(priceAmount);
 
         return {
           id:               node.id,
@@ -163,8 +165,8 @@ export default function ShopifyCollectionGrid({
           firstVariantId:   variant?.id ?? null,
           availableForSale: variant?.availableForSale ?? false,
           price:            formatShopifyPrice(priceAmount, currencyCode),
-          compareAtPrice:   compareAmount ? formatShopifyPrice(compareAmount, currencyCode) : null,
-          salePercent:      compareAmount ? calcSalePercent(priceAmount, compareAmount) : null,
+          compareAtPrice:   hasRealDiscount ? formatShopifyPrice(compareAmount!, currencyCode) : null,
+          salePercent:      hasRealDiscount ? calcSalePercent(priceAmount, compareAmount!) : null,
           tags:             node.tags,
         };
       });

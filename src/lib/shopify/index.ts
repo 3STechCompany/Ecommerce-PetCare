@@ -33,6 +33,18 @@ export function formatShopifyPrice(amount: string, currencyCode: string): string
   }
 }
 
+// Nhiều sản phẩm trong catalog có compareAtPrice == price (không phải giảm giá thật).
+// Chỉ trả về compareAtPrice đã format nếu nó thực sự LỚN HƠN giá bán.
+export function getValidCompareAtPrice(
+  amount: string,
+  compareAmount: string | null | undefined,
+  currencyCode: string
+): string | undefined {
+  if (!compareAmount) return undefined;
+  if (parseFloat(compareAmount) <= parseFloat(amount)) return undefined;
+  return formatShopifyPrice(compareAmount, currencyCode);
+}
+
 // ============================================================
 // HELPER: Chuẩn hoá connection edge → array
 // ============================================================
@@ -57,14 +69,23 @@ export function transformShopifyProduct(raw: RawShopifyProduct): ProductDetail {
     id: v.id,
     label: v.selectedOptions.map((o) => o.value).join(" / ") || v.title,
     price: formatShopifyPrice(v.price.amount, v.price.currencyCode),
-    compareAtPrice: v.compareAtPrice
-      ? formatShopifyPrice(v.compareAtPrice.amount, v.compareAtPrice.currencyCode)
-      : undefined,
+    compareAtPrice: getValidCompareAtPrice(
+      v.price.amount,
+      v.compareAtPrice?.amount,
+      v.compareAtPrice?.currencyCode ?? v.price.currencyCode
+    ),
     image: v.image?.url ?? images[0]?.url ?? "",
     available: v.availableForSale,
   }));
 
-  const hasDiscount = !!firstVariant?.compareAtPrice;
+  const firstCompareAtPrice = firstVariant
+    ? getValidCompareAtPrice(
+        firstVariant.price.amount,
+        firstVariant.compareAtPrice?.amount,
+        firstVariant.compareAtPrice?.currencyCode ?? firstVariant.price.currencyCode
+      )
+    : undefined;
+  const hasDiscount = !!firstCompareAtPrice;
 
   return {
     slug: raw.handle,
@@ -76,10 +97,7 @@ export function transformShopifyProduct(raw: RawShopifyProduct): ProductDetail {
     price: firstVariant
       ? formatShopifyPrice(firstVariant.price.amount, firstVariant.price.currencyCode)
       : "",
-    compareAtPrice:
-      firstVariant?.compareAtPrice
-        ? formatShopifyPrice(firstVariant.compareAtPrice.amount, firstVariant.compareAtPrice.currencyCode)
-        : undefined,
+    compareAtPrice: firstCompareAtPrice,
     badge: hasDiscount ? "Sale" : undefined,
     taxNote: "Tax included.",
     // Storefront API không trả về inventory count → hiển thị 0 (component sẽ dùng availableForSale)

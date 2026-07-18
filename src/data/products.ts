@@ -12,6 +12,7 @@ export interface Product {
   variantId?: string;
   sizes?: string[];
   colors?: string[];
+  tags?: string[];
 }
 
 export const products: Product[] = [

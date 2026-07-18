@@ -19,12 +19,6 @@ export const categoryCollections: Collection[] = [
     image: "/images/collections/dog-accessories.webp",
   },
   {
-    id: "cat-toys",
-    title: "Cat Toys",
-    href: "/collections/cat-toys",
-    image: "/images/collections/cat-food.webp",
-  },
-  {
     id: "dog-toys",
     title: "Dog Toys",
     href: "/collections/dog-toys",

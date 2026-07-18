@@ -14,7 +14,6 @@ import ProductInfo from "@/components/ProductInfo/ProductInfo";
 import ScrollingText from "@/components/ScrollingText/ScrollingText";
 import RelatedProducts from "@/components/RelatedProducts/RelatedProducts";
 import RichText from "@/components/RichText/RichText";
-import ProductComparisonSlider from "@/components/ProductComparisonSlider/ProductComparisonSlider";
 import ProductFaqSection from "@/components/ProductFaqSection/ProductFaqSection";
 import RecentlyViewedProducts from "@/components/RecentlyViewedProducts/RecentlyViewedProducts";
 import QuickInfoBar from "@/components/QuickInfoBar/QuickInfoBar";
@@ -66,14 +65,20 @@ export default async function ProductPage({
 
   const [product, allProducts] = await Promise.all([
     fetchProductDetailByHandle(slug),
-    fetchProducts(12),
+    fetchProducts(20),
   ]);
 
   if (!product) notFound();
 
-  // Related & recently viewed: real API products excluding current
+  // Related & recently viewed: real API products excluding current,
+  // deduped by title (catalog has a couple of literal duplicate listings)
+  const seenTitles = new Set<string>([product.title]);
   const otherProducts: Product[] = allProducts
-    .filter((p) => p.handle !== slug)
+    .filter((p) => {
+      if (p.handle === slug || seenTitles.has(p.title)) return false;
+      seenTitles.add(p.title);
+      return true;
+    })
     .map((p) => ({
       id: p.id,
       title: p.title,
@@ -86,10 +91,20 @@ export default async function ProductPage({
       collection: "related",
       available: p.variants[0]?.availableForSale ?? false,
       variantId: p.variants[0]?.id,
+      tags: p.tags,
     }));
 
-  const relatedProducts = otherProducts.slice(0, 4);
-  const recentProducts  = otherProducts.slice(4, 8);
+  // Prefer products that share a functional category tag (grooming/toys/outdoor)
+  // over a fully random cross-category mix.
+  const FUNCTIONAL_TAGS = ["grooming", "toys", "outdoor"];
+  const productFunctionalTags = product.tags.filter((t) => FUNCTIONAL_TAGS.includes(t));
+  const sameCategory = otherProducts.filter((p) =>
+    p.tags?.some((t) => productFunctionalTags.includes(t))
+  );
+  const rest = otherProducts.filter((p) => !sameCategory.includes(p));
+
+  const relatedProducts = [...sameCategory, ...rest].slice(0, 4);
+  const recentProducts  = [...sameCategory, ...rest].slice(4, 8);
 
   // JSON-LD Product schema
   const jsonLd = {
@@ -136,7 +151,6 @@ export default async function ProductPage({
 
       <RelatedProducts products={relatedProducts} />
       <RichText />
-      <ProductComparisonSlider />
       <ProductFaqSection />
 
       <ScrollingText texts={["All your furry friend's needs — treats to toys.", "Care and joy for every paw.", "Quality essentials for happy, healthy pets."]} />

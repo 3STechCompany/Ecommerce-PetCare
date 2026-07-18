@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { shopifyFetch } from "@/lib/shopify/client";
 import { GET_COLLECTION_BY_HANDLE } from "@/lib/shopify/queries";
-import { formatShopifyPrice } from "@/lib/shopify";
+import { formatShopifyPrice, getValidCompareAtPrice } from "@/lib/shopify";
 import ProductCard from "@/components/ProductCard/ProductCard";
 import { Product } from "@/data/products";
 import "./CollectionTabs.css";
@@ -47,10 +47,13 @@ function shopifyToProduct(node: CollectionNode, handle: string): Product {
   const price = variant
     ? formatShopifyPrice(variant.price.amount, variant.price.currencyCode)
     : "—";
-  const compareAtPrice =
-    variant?.compareAtPrice
-      ? formatShopifyPrice(variant.compareAtPrice.amount, variant.compareAtPrice.currencyCode)
-      : undefined;
+  const compareAtPrice = variant
+    ? getValidCompareAtPrice(
+        variant.price.amount,
+        variant.compareAtPrice?.amount,
+        variant.compareAtPrice?.currencyCode ?? variant.price.currencyCode
+      )
+    : undefined;
 
   return {
     id: node.id,

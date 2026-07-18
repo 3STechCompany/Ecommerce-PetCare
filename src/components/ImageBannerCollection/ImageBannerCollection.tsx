@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { shopifyFetch } from "@/lib/shopify/client";
 import { GET_COLLECTION_BY_HANDLE } from "@/lib/shopify/queries";
-import { formatShopifyPrice } from "@/lib/shopify";
+import { formatShopifyPrice, getValidCompareAtPrice } from "@/lib/shopify";
 import ProductCard from "@/components/ProductCard/ProductCard";
 import { Product } from "@/data/products";
 import "./ImageBannerCollection.css";
@@ -39,8 +39,12 @@ function nodeToProduct(node: Node): Product {
   const price = variant
     ? formatShopifyPrice(variant.price.amount, variant.price.currencyCode)
     : "—";
-  const compareAtPrice = variant?.compareAtPrice
-    ? formatShopifyPrice(variant.compareAtPrice.amount, variant.compareAtPrice.currencyCode)
+  const compareAtPrice = variant
+    ? getValidCompareAtPrice(
+        variant.price.amount,
+        variant.compareAtPrice?.amount,
+        variant.compareAtPrice?.currencyCode ?? variant.price.currencyCode
+      )
     : undefined;
   const badge = node.tags.includes("new") ? "new" : compareAtPrice ? "sale" : undefined;
 
@@ -125,10 +129,9 @@ export default function ImageBannerCollection() {
               </em>
             </h2>
             <p style={{ maxWidth: "50rem", lineHeight: 1.7, marginBottom: "2.5rem" }}>
-              Discover a curated collection of stylish and functional accessories
-              designed to keep your feline friend happy and comfortable. From
-              playful tunnels to elegant feeding sets, find everything your cat
-              needs to thrive.
+              Discover a curated collection of grooming tools, cozy donut beds,
+              and travel-ready carriers designed to keep your feline friend
+              happy and comfortable — everything your cat needs to thrive.
             </p>
             <Link href="/collections/cat-accessories" className="button button--primary">
               Shop Now
