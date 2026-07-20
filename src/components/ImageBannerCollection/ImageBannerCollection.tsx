@@ -60,6 +60,7 @@ function nodeToProduct(node: Node): Product {
     collection: "cat-accessories",
     available: variant?.availableForSale ?? false,
     variantId: variant?.id,
+    tags: node.tags,
   };
 }
 

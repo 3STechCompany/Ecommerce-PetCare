@@ -7,6 +7,7 @@ import QuantitySelector from "@/components/QuantitySelector/QuantitySelector";
 import ProductAccordion from "@/components/ProductAccordion/ProductAccordion";
 import ComplementaryProducts from "@/components/ComplementaryProducts/ComplementaryProducts";
 import { useCart } from "@/context/CartContext";
+import { getShippingScope } from "@/lib/shipping";
 import "./ProductInfo.css";
 
 interface ProductInfoProps {
@@ -22,6 +23,8 @@ export default function ProductInfo({ product }: ProductInfoProps) {
     () => product.variants.find((v) => v.id === selectedVariant) ?? product.variants[0],
     [selectedVariant, product.variants]
   );
+
+  const shipping = getShippingScope(product.tags);
 
   const deliveryDates = useMemo(() => {
     const now = new Date();
@@ -115,6 +118,14 @@ export default function ProductInfo({ product }: ProductInfoProps) {
                   <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" fill="currentColor" />
                 </svg>
                 Delivery between: <strong>{deliveryDates.earliest}</strong> — <strong>{deliveryDates.latest}</strong>
+              </div>
+
+              {/* Shipping scope: US-only vs US & EU, driven by the "ships-eu" Shopify tag */}
+              <div className="product-delivery">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                  <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zM1.5 8a6.5 6.5 0 0 1 .5-2.5l1.5 1v1l1 1v1.5l1 1V12h-1a2 2 0 0 0-2 2v.2A6.48 6.48 0 0 1 1.5 8zm7.5 6.45V13a1 1 0 0 0-1-1H7l-2.5-2.5V8H6l2 2h1.5l1-1L12 10.5V12l-1.03 1.03A6.5 6.5 0 0 1 9 14.45z" />
+                </svg>
+                {shipping.label}
               </div>
 
               {/* Variant Picker */}

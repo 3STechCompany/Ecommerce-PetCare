@@ -208,3 +208,22 @@
   color: rgba(var(--color-foreground), 0.5);
   font-size: 1.2rem;
 }
+
+.product-card-v2__shipping {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.6rem;
+  padding: 0.2rem 0.8rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.02rem;
+  color: rgba(var(--color-foreground), 0.65);
+  background: rgba(var(--color-foreground), 0.06);
+}
+
+.product-card-v2__shipping--wide {
+  color: rgb(200, 39, 61);
+  background: rgba(200, 39, 61, 0.1);
+}

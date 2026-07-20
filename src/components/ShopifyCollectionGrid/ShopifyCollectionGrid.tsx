@@ -19,6 +19,7 @@ import { shopifyFetch } from "@/lib/shopify/client";
 import { GET_COLLECTION_BY_HANDLE, GET_PRODUCTS_BY_TAG, GET_PRODUCTS } from "@/lib/shopify/queries";
 import { useCart } from "@/context/CartContext";
 import { formatShopifyPrice } from "@/lib/shopify";
+import { getShippingScope } from "@/lib/shipping";
 import "@/components/CollectionProductGrid/CollectionProductGrid.css";
 import "./ShopifyCollectionGrid.css";
 
@@ -502,6 +503,15 @@ export default function ShopifyCollectionGrid({
                         </s>
                       )}
                     </div>
+
+                    {(() => {
+                      const shipping = getShippingScope(product.tags);
+                      return (
+                        <span className={`product-card-v2__shipping ${shipping.shipsToEU ? "product-card-v2__shipping--wide" : ""}`}>
+                          {shipping.short}
+                        </span>
+                      );
+                    })()}
                   </div>
                 </div>
               </li>

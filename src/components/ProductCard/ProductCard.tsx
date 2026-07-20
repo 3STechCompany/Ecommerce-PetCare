@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Product } from "@/data/products";
 import { useCart } from "@/context/CartContext";
+import { getShippingScope } from "@/lib/shipping";
 import "./ProductCard.css";
 
 interface ProductCardProps {
@@ -13,6 +14,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   const router = useRouter();
   const { addToCart } = useCart();
   const [adding, setAdding] = useState(false);
+  const shipping = getShippingScope(product.tags);
 
   async function handleAddToCart(e: React.MouseEvent) {
     e.preventDefault();
@@ -102,6 +104,9 @@ export default function ProductCard({ product }: ProductCardProps) {
           )}
           <span className="product-card__price--sale">{product.price}</span>
         </div>
+        <span className={`product-card__shipping ${shipping.shipsToEU ? "product-card__shipping--wide" : ""}`}>
+          {shipping.short}
+        </span>
       </div>
     </div>
   );

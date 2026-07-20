@@ -153,6 +153,25 @@
   font-weight: 600;
 }
 
+.product-card__shipping {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.6rem;
+  padding: 0.2rem 0.8rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.02rem;
+  color: rgba(var(--color-foreground), 0.65);
+  background: rgba(var(--color-foreground), 0.06);
+}
+
+.product-card__shipping--wide {
+  color: rgb(var(--color-accent, 200 39 61));
+  background: rgba(var(--color-accent, 200 39 61), 0.1);
+}
+
 @keyframes spin {
   to { transform: rotate(360deg); }
 }

@@ -66,6 +66,7 @@ function shopifyToProduct(node: CollectionNode, handle: string): Product {
     collection: handle,
     available: variant?.availableForSale ?? false,
     variantId: variant?.id,
+    tags: node.tags,
   };
 }
 

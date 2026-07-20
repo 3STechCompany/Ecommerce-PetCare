@@ -52,6 +52,7 @@ function nodeToProduct(node: Node): Product {
     collection: "featured",
     available: variant?.availableForSale ?? false,
     variantId: variant?.id,
+    tags: node.tags,
   };
 }
 
