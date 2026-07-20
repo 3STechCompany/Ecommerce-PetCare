@@ -56,7 +56,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       <div className="product-layout page-width">
         {/* Gallery */}
         <div className="product-layout__gallery">
-          <ProductGallery images={product.images} title={product.title} />
+          <ProductGallery images={product.images} title={product.title} selectedImage={currentVariant.image} />
         </div>
 
         {/* Info */}

@@ -13,6 +13,7 @@
 // ============================================================
 
 import { useState, useEffect, useCallback, useRef } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { shopifyFetch } from "@/lib/shopify/client";
@@ -121,6 +122,7 @@ export default function ShopifyCollectionGrid({
   const toastTimer                  = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const { addToCart } = useCart();
+  const router = useRouter();
 
   // ── Fetch dữ liệu từ Shopify khi collectionHandle thay đổi ──
   useEffect(() => {
@@ -383,7 +385,11 @@ export default function ShopifyCollectionGrid({
                 <div className="product-card-v2">
 
                   {/* ── Media ── */}
-                  <div className="product-card-v2__media">
+                  <div
+                    className="product-card-v2__media"
+                    onClick={() => router.push(`/products/${product.handle}`)}
+                    style={{ cursor: "pointer" }}
+                  >
                     {/* Ảnh chính */}
                     {product.primaryImage && (
                       <Image
@@ -458,7 +464,7 @@ export default function ShopifyCollectionGrid({
                           isAdded  ? "is-added"   : "",
                         ].join(" ")}
                         disabled={isAdding || !product.availableForSale}
-                        onClick={() => handleQuickAdd(product)}
+                        onClick={(e) => { e.stopPropagation(); handleQuickAdd(product); }}
                         aria-label={
                           isAdding ? "Adding to cart…" :
                           isAdded  ? "Added!" :

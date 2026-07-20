@@ -1,14 +1,22 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./ProductGallery.css";
 
 interface ProductGalleryProps {
   images: string[];
   title: string;
+  // URL ảnh của variant đang chọn (nếu có) — gallery sẽ nhảy tới ảnh này khi variant đổi.
+  selectedImage?: string;
 }
 
-export default function ProductGallery({ images, title }: ProductGalleryProps) {
+export default function ProductGallery({ images, title, selectedImage }: ProductGalleryProps) {
   const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    if (!selectedImage) return;
+    const index = images.indexOf(selectedImage);
+    if (index >= 0) setActiveIndex(index);
+  }, [selectedImage, images]);
 
   const goTo = (index: number) => {
     if (index < 0) index = images.length - 1;

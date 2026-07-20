@@ -18,6 +18,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   async function handleAddToCart(e: React.MouseEvent) {
     e.preventDefault();
+    e.stopPropagation();
     if (!product.variantId) {
       router.push(product.href);
       return;
@@ -32,12 +33,17 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   function handleViewDetail(e: React.MouseEvent) {
     e.preventDefault();
+    e.stopPropagation();
+    router.push(product.href);
+  }
+
+  function handleCardClick() {
     router.push(product.href);
   }
 
   return (
     <div className="product-card">
-      <div className="product-card__media">
+      <div className="product-card__media" onClick={handleCardClick} style={{ cursor: "pointer" }}>
         {product.badge && (
           <span className={`product-card__badge product-card__badge--${product.badge}`}>
             {product.badge}
