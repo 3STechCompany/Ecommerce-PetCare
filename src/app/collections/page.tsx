@@ -42,7 +42,10 @@ export default async function CollectionsPage() {
     cache: "no-store",
   }).catch(() => null);
 
-  const collections = data?.collections?.edges?.map((e) => e.node) ?? [];
+  // Ẩn collection chưa có sản phẩm (vd: Cat Toys hiện đang rỗng) thay vì hiện ô trống/ảnh vỡ
+  const collections = (data?.collections?.edges?.map((e) => e.node) ?? []).filter(
+    (col) => col.products.edges.length > 0
+  );
 
   return (
     <>

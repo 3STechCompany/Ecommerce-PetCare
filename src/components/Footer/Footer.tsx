@@ -76,7 +76,6 @@ export default function Footer() {
             <h3 className="footer__column-title">Shop</h3>
             <Link href="/collections/all"          className="footer__link">All Products</Link>
             <Link href="/collections/cat-accessories" className="footer__link">Cat Accessories</Link>
-            <Link href="/collections/cat-toys"     className="footer__link">Cat Toys</Link>
             <Link href="/collections/dog-accessories" className="footer__link">Dog Accessories</Link>
             <Link href="/collections/dog-toys"     className="footer__link">Dog Toys</Link>
           </div>

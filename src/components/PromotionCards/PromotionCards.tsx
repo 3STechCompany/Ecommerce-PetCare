@@ -10,22 +10,16 @@ const promoCards = [
     href: "/collections/dog-accessories",
   },
   {
-    image: "/images/categories/cat-food.jpg",
-    title: "Cat Food",
+    image: "/images/categories/cat-accessorize.jpg",
+    title: "Cat Accessories",
     sale: "25% sale",
-    href: "/collections/cat-food",
+    href: "/collections/cat-accessories",
   },
   {
     image: "/images/categories/dog-toys.jpg",
     title: "Dog Toys",
     sale: "15% Sale",
     href: "/collections/dog-toys",
-  },
-  {
-    image: "/images/categories/cat-toys.jpg",
-    title: "Cat Toys",
-    sale: "20% sale",
-    href: "/collections/cat-toys",
   },
 ];
 

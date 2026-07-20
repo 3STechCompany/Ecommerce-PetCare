@@ -12,9 +12,9 @@ const slides = [
     caption: "Give your pet the ultimate relaxation experience with our soft, durable beds designed for comfort and style.",
   },
   {
-    image: "/images/categories/cat-toys.jpg",
+    image: "/images/categories/dog-toys.jpg",
     heading: "Fun Toys",
-    link: "/collections/cat-toys",
+    link: "/collections/dog-toys",
     linkText: "Discover Toys",
     caption: "Keep your pets entertained for hours with our wide range of safe and engaging toys made for all ages and sizes.",
   },

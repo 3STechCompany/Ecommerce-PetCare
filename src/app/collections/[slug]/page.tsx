@@ -22,49 +22,23 @@ const SLUG_ALIASES: Record<string, string> = {
 };
 
 // ── Subcollection navigation sidebar ──
+// Chỉ liệt kê 3 collection thật đang có sản phẩm (cat-toys đang rỗng, và
+// "dogs"/"cats"/"dog-food"/"cat-food" không tồn tại trên Shopify store này).
 const SUBCOLLECTION_MAP: Record<
   string,
   { id: string; title: string; href: string; image: string }[]
 > = {
-  dogs: [
-    { id: "dog-toys",        title: "Dog Toys",        href: "/collections/dog-toys",        image: "/images/collections/dog-toys.webp" },
-    { id: "dog-food",        title: "Dog Food",        href: "/collections/dog-food",        image: "/images/collections/dog-food.webp" },
-    { id: "dog-accessories", title: "Dog Accessories", href: "/collections/dog-accessories", image: "/images/collections/dog-accessories.webp" },
-  ],
   "dog-toys": [
-    { id: "dogs",            title: "All Dogs",        href: "/collections/dogs",            image: "/images/collections/dog-toys.webp" },
     { id: "dog-accessories", title: "Dog Accessories", href: "/collections/dog-accessories", image: "/images/collections/dog-accessories.webp" },
-    { id: "dog-food",        title: "Dog Food",        href: "/collections/dog-food",        image: "/images/collections/dog-food.webp" },
+    { id: "cat-accessories", title: "Cat Accessories", href: "/collections/cat-accessories", image: "/images/collections/cat-accessories.webp" },
   ],
   "dog-accessories": [
-    { id: "dogs",     title: "All Dogs",  href: "/collections/dogs",     image: "/images/collections/dog-accessories.webp" },
-    { id: "dog-toys", title: "Dog Toys",  href: "/collections/dog-toys", image: "/images/collections/dog-toys.webp" },
-    { id: "dog-food", title: "Dog Food",  href: "/collections/dog-food", image: "/images/collections/dog-food.webp" },
-  ],
-  "dog-food": [
-    { id: "dogs",            title: "All Dogs",        href: "/collections/dogs",            image: "/images/collections/dog-food.webp" },
     { id: "dog-toys",        title: "Dog Toys",        href: "/collections/dog-toys",        image: "/images/collections/dog-toys.webp" },
-    { id: "dog-accessories", title: "Dog Accessories", href: "/collections/dog-accessories", image: "/images/collections/dog-accessories.webp" },
-  ],
-  cats: [
-    { id: "cat-toys",        title: "Cat Toys",        href: "/collections/cat-toys",        image: "/images/collections/cat-food.webp" },
-    { id: "cat-food",        title: "Cat Food",        href: "/collections/cat-food",        image: "/images/collections/cat-food.webp" },
     { id: "cat-accessories", title: "Cat Accessories", href: "/collections/cat-accessories", image: "/images/collections/cat-accessories.webp" },
-  ],
-  "cat-toys": [
-    { id: "cats",            title: "All Cats",        href: "/collections/cats",            image: "/images/collections/cat-food.webp" },
-    { id: "cat-accessories", title: "Cat Accessories", href: "/collections/cat-accessories", image: "/images/collections/cat-accessories.webp" },
-    { id: "cat-food",        title: "Cat Food",        href: "/collections/cat-food",        image: "/images/collections/cat-food.webp" },
   ],
   "cat-accessories": [
-    { id: "cats",     title: "All Cats", href: "/collections/cats",     image: "/images/collections/cat-accessories.webp" },
-    { id: "cat-toys", title: "Cat Toys", href: "/collections/cat-toys", image: "/images/collections/cat-food.webp" },
-    { id: "cat-food", title: "Cat Food", href: "/collections/cat-food", image: "/images/collections/cat-food.webp" },
-  ],
-  "cat-food": [
-    { id: "cats",            title: "All Cats",        href: "/collections/cats",            image: "/images/collections/cat-food.webp" },
-    { id: "cat-toys",        title: "Cat Toys",        href: "/collections/cat-toys",        image: "/images/collections/cat-food.webp" },
-    { id: "cat-accessories", title: "Cat Accessories", href: "/collections/cat-accessories", image: "/images/collections/cat-accessories.webp" },
+    { id: "dog-accessories", title: "Dog Accessories", href: "/collections/dog-accessories", image: "/images/collections/dog-accessories.webp" },
+    { id: "dog-toys",        title: "Dog Toys",        href: "/collections/dog-toys",        image: "/images/collections/dog-toys.webp" },
   ],
 };
 
