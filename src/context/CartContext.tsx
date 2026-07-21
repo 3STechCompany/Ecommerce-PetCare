@@ -21,6 +21,7 @@ import {
   type ReactNode,
 } from "react";
 import { shopifyFetch } from "@/lib/shopify/client";
+import { trackInitiateCheckout } from "@/lib/fbPixel";
 import {
   CART_CREATE,
   CART_LINES_ADD,
@@ -271,9 +272,18 @@ export function CartProvider({ children }: { children: ReactNode }) {
       alert("Giỏ hàng trống hoặc chưa được tạo. Vui lòng thêm sản phẩm trước.");
       return;
     }
+
+    // Bắn event Meta Pixel "InitiateCheckout" trước khi rời trang
+    trackInitiateCheckout({
+      value: parseFloat(cart.cost.totalAmount.amount),
+      currency: cart.cost.totalAmount.currencyCode,
+      numItems: cart.totalQuantity,
+      contentIds: cart.lines.map((line) => line.merchandise.id),
+    });
+
     // Redirect sang trang Shopify Checkout (HTTPS, bảo mật, hỗ trợ Stripe/PayPal)
     window.location.href = cart.checkoutUrl;
-  }, [cart?.checkoutUrl]);
+  }, [cart]);
 
   return (
     <CartContext value={{ cart, isLoading, cartCount, isCartOpen, openCart, closeCart, addToCart, updateQuantity, removeLine, goToCheckout }}>

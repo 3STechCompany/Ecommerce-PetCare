@@ -6,6 +6,7 @@ import PageLoader from "@/components/PageLoader/PageLoader";
 import ScrollProgress from "@/components/ScrollProgress/ScrollProgress";
 import { CartProvider } from "@/context/CartContext";
 import CartDrawer from "@/components/CartDrawer/CartDrawer";
+import FacebookPixel from "@/components/FacebookPixel/FacebookPixel";
 
 const BASE_URL = "https://petcare3s.shop";
 
@@ -61,6 +62,7 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body>
+        <FacebookPixel />
         {/*
           CartProvider bọc toàn bộ app → mọi component con đều có thể gọi useCart()
           để thêm sản phẩm vào giỏ, xem số lượng, và redirect sang Shopify Checkout
